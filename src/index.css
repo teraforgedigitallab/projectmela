@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary Colors */
+  --color-primary: #2042e3;
+  --color-primary-hover: #081828;
+  --color-secondary: #0d233e;
+
+  /* Text Colors */
+  --color-text-body: #586982;
+  --color-text-heading: #0d233e;
+
+  /* Neutral Colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-100: #f8f8f8;
+  /* was gray-2 */
+  --color-gray-200: #f4f7fa;
+  /* was gray */
+  --color-gray-300: #eef2f6;
+  /* was gray-3 */
+  --color-gray-400: #e1e7f0;
+  /* was gray-4 */
+  --color-gray-500: #cacad6;
+  /* was gray-5 */
+  --color-gray-600: #adb5bd;
+  /* was gray-6 */
+  --color-gray-700: #6c757d;
+  /* was gray-7 */
+
+  --color-iconbg: #f4f5fe;
+
+  /* Dark Theme Colors */
+  --color-dark-1: #343a40;
+  --color-dark-2: #212529;
+  --color-dark-3: #1a222c;
+
+  /* Semantic Colors */
+  --color-success: #28a745;
+  --color-info: #17a2b8;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+
+  /* Other */
+  --color-border: #eef2f6;
+  --color-light-bg: #f4f7fa;
+
+  /* Shadows */
+  --shadow-sm: 0px 8px 20px rgba(165, 165, 165, 0.1);
+  --shadow-md: 0px 0px 40px rgba(165, 165, 165, 0.1);
+  --shadow-lg: 0px 10px 40px rgba(0, 102, 245, 0.1);
+  --shadow-xl: 0px 10px 30px rgba(0, 102, 245, 0.15);
+  --shadow-drop: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes waves {
+  0% {
+    transform: scale(0.2, 0.2);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: scale(0.9, 0.9);
+    opacity: 0;
+  }
+}
+
+.waves-animate {
+  animation: waves 4s ease-in-out infinite;
+}
+
+body {
+  /* font-family: 'Aspekta', sans-serif; */
+  font-family: 'Poppins';
+}
+
+.logo-font {
+  font-family: 'Playwrite AU QLD', cursive;
+  font-weight: 600;
+  color: var(--color-primary);
+}
