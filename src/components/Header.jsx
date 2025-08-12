@@ -5,12 +5,14 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { BiLockAlt } from "react-icons/bi";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth } from "../firebaseConfig/firebase";
+import { Modal } from "../ui";
 
 const Header = ({ isHomePage = false }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -55,57 +57,44 @@ const Header = ({ isHomePage = false }) => {
   const navItems = [
     {
       name: "Home",
-      path: "/",
-      dropdown: "home",
-      subItems: [
-        { name: "Home 1", path: "/" },
-        { name: "Home 2", path: "/home-2" },
-        { name: "Home 3", path: "/home-3" },
-        { name: "Home 4", path: "/home-4" },
-      ],
+      path: "/"
     },
     {
-      name: "Candidates",
-      path: "/candidates",
-      dropdown: "candidates",
-      subItems: [
-        { name: "Browse Jobs", path: "/browse-jobs" },
-        { name: "Browse Categories", path: "/browse-categories" },
-        { name: "Add Resume", path: "/add-resume" },
-        { name: "Job Alerts", path: "/job-alerts" },
-      ],
+      name: "Projects",
+      path: "/projects"
     },
     {
-      name: "Employers",
-      path: "/employers",
-      dropdown: "employers",
-      subItems: [
-        { name: "Add Job", path: "/post-project" },
-        { name: "Manage Jobs", path: "/manage-jobs" },
-        { name: "Manage Applications", path: "/manage-applications" },
-        { name: "Manage Resume", path: "/manage-resume" },
-        { name: "Browse Resumes", path: "/browse-resumes" },
-      ],
+      name: "People",
+      path: "/browse-profiles"
     },
     {
-      name: "Blog",
-      path: "/blog",
-      dropdown: "blog",
-      subItems: [
-        { name: "Blog Grid Sidebar", path: "/blog-grid" },
-        { name: "Blog Single", path: "/blog-single" },
-        { name: "Blog Single Sidebar", path: "/blog-single-sidebar" },
-      ],
+      name: "About",
+      path: "/about"
     },
+    // {
+    //   name: "Blog",
+    //   path: "/blog",
+    //   dropdown: "blog",
+    //   subItems: [
+    //     { name: "Blog Grid Sidebar", path: "/blog-grid" },
+    //     { name: "Blog Single", path: "/blog-single" },
+    //     { name: "Blog Single Sidebar", path: "/blog-single-sidebar" },
+    //   ],
+    // },
     {
       name: "Contact",
       path: "/contact",
     },
   ];
 
+  const initiateLogout = () => {
+    setShowLogoutModal(true);
+  };
+
   const handleLogout = async () => {
     await auth.signOut();
     setIsLoggedIn(false);
+    setShowLogoutModal(false);
     navigate("/signin");
   };
 
@@ -140,7 +129,7 @@ const Header = ({ isHomePage = false }) => {
                   <Link
                     to={item.path}
                     className={`px-4 py-7 inline-block text-sm font-medium transition-colors relative
-                      ${location.pathname === item.path || hoveredItem === item.dropdown
+        ${location.pathname === item.path
                         ? "text-primary"
                         : "text-gray-800 hover:text-primary"
                       }`}
@@ -148,7 +137,9 @@ const Header = ({ isHomePage = false }) => {
                     {item.name}
                     {/* Bottom border for active state */}
                     <span className={`absolute bottom-0 left-1/5 w-[60%] h-[3px] bg-primary transform origin-left transition-transform duration-300 
-                      ${location.pathname === item.path || hoveredItem === item.dropdown ? "scale-x-100" : "scale-x-0"}`}
+        ${location.pathname === item.path
+                        ? "scale-x-100"
+                        : "group-hover:scale-x-100 scale-x-0"}`}
                     />
                   </Link>
 
@@ -216,11 +207,11 @@ const Header = ({ isHomePage = false }) => {
                   Profile
                 </Link>
                 <button
-                  onClick={handleLogout}
+                  onClick={initiateLogout}
                   className="bg-primary hover:bg-primary-hover text-white font-medium py-2 px-6 rounded text-sm transition-all duration-300 ease-in-out shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 >
                   Sign Out
-                  <IoLogOutOutline size={18}/>
+                  <IoLogOutOutline size={18} />
                 </button>
               </>
             )}
@@ -321,7 +312,7 @@ const Header = ({ isHomePage = false }) => {
                   <>
                     <Link
                       to="/signin"
-                      className="flex items-center justify-center text-sm font-medium text-gray-700 hover:text-primary py-2 border border-gray-200 rounded-md"
+                      className="flex items-center justify-center text-sm font-medium text-gray-700 hover:text-primary py-2 border border-gray-200 rounded-sm"
                       data-toggle="modal"
                       data-target="#login"
                     >
@@ -330,7 +321,7 @@ const Header = ({ isHomePage = false }) => {
                     </Link>
                     <Link
                       to="/signup"
-                      className="bg-primary text-white py-2.5 rounded-md font-medium hover:bg-primary-hover text-center text-sm shadow-sm transition-all duration-300"
+                      className="bg-primary text-white py-2.5 rounded-sm font-medium hover:bg-primary-hover text-center text-sm shadow-sm transition-all duration-300"
                       data-toggle="modal"
                       data-target="#signup"
                     >
@@ -341,17 +332,17 @@ const Header = ({ isHomePage = false }) => {
                   <>
                     <Link
                       to="/profile"
-                      className="flex items-center justify-center text-sm font-medium text-primary hover:text-primary-hover py-2 border border-gray-200 rounded-md"
+                      className="flex items-center justify-center text-sm font-medium text-primary hover:text-primary-hover py-2 border border-gray-200 rounded-sm"
                     >
                       <FaUserCircle className="mr-2 text-xl" />
                       Profile
                     </Link>
                     <button
-                      onClick={handleLogout}
-                      className="bg-primary text-white py-2.5 rounded-md font-medium hover:bg-primary-hover text-center text-sm shadow-sm transition-all duration-300 ease-in-out w-full flex items-center justify-center gap-2"
+                      onClick={initiateLogout}
+                      className="bg-primary text-white py-2.5 rounded-sm font-medium hover:bg-primary-hover text-center text-sm shadow-sm transition-all duration-300 ease-in-out w-full flex items-center justify-center gap-2"
                     >
                       Sign Out
-                      <IoLogOutOutline size={18}/>
+                      <IoLogOutOutline size={18} />
                     </button>
                   </>
                 )}
@@ -360,6 +351,17 @@ const Header = ({ isHomePage = false }) => {
           </motion.div>
         )}
       </AnimatePresence>
+      <Modal
+        show={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+        heading="Sign Out"
+        body="Are you sure you want to sign out?"
+        showButtons={true}
+        primaryButtonText="Sign Out"
+        secondaryButtonText="Cancel"
+        onPrimaryClick={handleLogout}
+        onSecondaryClick={() => setShowLogoutModal(false)}
+      />
     </header>
   );
 };

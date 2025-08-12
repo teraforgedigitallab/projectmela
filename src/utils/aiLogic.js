@@ -18,7 +18,7 @@ export const processResumeWithAI = async (text, geminiApiKey, originalEmail) => 
         // Generate AI prompt
         const prompt = `Extract the following information from this resume text and format as a valid JSON object with the exact following structure:
         {
-            "FirstName": "",
+            "FirstName": "", (Cannot be empty)
             "LastName": "",
             "Email": "",
             "Mobile": "",
@@ -28,28 +28,25 @@ export const processResumeWithAI = async (text, geminiApiKey, originalEmail) => 
             "City": "",
             "State": "",
             "Country": "",
-            "Designation": "",
+            "Designation": "",(Cannot be empty, make suitable title based on the resume)
             "XP": "",
             "ResumeLink": "",
             "GithubLink": "",
             "LinkedinLink": "",
             "InstagramLink": "",
-            "Skills": [],
-            "AboutMe": "",
-            "MyExperience": "",
-            "PastProjects": "",
+            "Skills": [], (Extract technical skills and match them with the following options, maximum 20 skills. If a skill is not in the options, match it to the nearest skill mentioned in the options: ${JSON.stringify(skillOptions)})
+            "AboutMe": "", (Cannot be empty, craft suitable description of the candidate based on the resume)
+            "MyExperience": "", (Cannot be empty, craft suitable experience based on the resume)
+            "PastProjects": "", (Cannot be empty, craft suitable past projects based on the resume)
             "websiteUrl": "",
-            "educationalQualification": "",
-            "educationalInstitute": ""
+            "educationalQualification": "",(Cannot be empty, like what degree/ course is the candidate pursuing in college or school)
+            "educationalInstitute": "" (Cannot be empty, like name of the college or school)
         }
+        - Fill in the values based on the resume text. For gender, guess based on the first name if not explicitly mentioned. Ensure the MyExperience and PastProjects sections cover all relevant information.
         - All fields must be filled with the most accurate information from the resume. If a field is missing, use an empty string or empty array.
         - DO NOT REPLACE THE ACTUAL EMAIL ID THAT WAS THERE.
-        - For profilePic, use any image URL found or leave blank.
-        - For Skills, only include skills from this list (max 20): ${JSON.stringify(skillOptions)}
-        - For XP, use years of experience or similar metric.
         - For ResumeLink, GithubLink, LinkedinLink, InstagramLink, websiteUrl, use any relevant URLs found.
-        - For educationalQualification and educationalInstitute, use the most recent or highest degree and institution.
-        - AboutMe, MyExperience, PastProjects should be concise summaries based on the resume.
+        
         Respond only with the JSON object, no extra text.
 
         Resume Text:
@@ -80,16 +77,16 @@ export const processResumeWithAI = async (text, geminiApiKey, originalEmail) => 
                 lastName: parsedData.LastName || "",
                 email: originalEmail || "",
                 phone: parsedData.Mobile || "",
-                avatar: parsedData.profilePic || "", 
+                avatar: parsedData.profilePic || "",
                 designation: parsedData.Designation || "",
-                perHour: parsedData.XP || "", 
+                perHour: /^\d+$/.test(parsedData.XP) ? parsedData.XP : "",
                 resumeLink: parsedData.ResumeLink || "",
                 githubLink: parsedData.GithubProfile || parsedData.GithubLink || "",
                 linkedinLink: parsedData.LinkedInProfile || parsedData.LinkedinLink || "",
                 instagramLink: parsedData.InstagramProfile || parsedData.InstagramLink || "",
                 skills: validatedSkills,
                 about: parsedData.AboutMe || "",
-                myExperience: parsedData.Experience || "",
+                myExperience: parsedData.MyExperience || parsedData.Experience || "",
                 pastProjects: parsedData.PastProjects || "",
                 websiteUrl: parsedData.WebsiteUrl || "",
                 dateOfBirth: parsedData.DateOfBirth || "",
@@ -97,8 +94,8 @@ export const processResumeWithAI = async (text, geminiApiKey, originalEmail) => 
                 city: parsedData.City || "",
                 state: parsedData.State || "",
                 country: parsedData.Country || "",
-                educationalQualification: parsedData.EducationalQualification || "",
-                educationalInstitute: parsedData.EducationalInstitute || "",
+                educationalQualification: parsedData.EducationalQualification || parsedData.educationalQualification || parsedData.education || "",
+                educationalInstitute: parsedData.EducationalInstitute || parsedData.educationalInstitute || parsedData.institute || "",
                 avatar: parsedData.Gender === 'Male' ? maleAvatars[0] : parsedData.Gender === 'Female' ? femaleAvatars[0] : "",
             },
             skills: validatedSkills

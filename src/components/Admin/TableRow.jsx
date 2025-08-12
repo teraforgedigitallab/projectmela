@@ -422,7 +422,7 @@ const TableRow = ({
                 <td className="px-6 py-4">
                     <div className="relative">
                         {showDropdown ? (
-                            <div className="absolute z-10 mt-2 w-64 bg-white border border-gray-200 rounded-md shadow-lg max-h-64 overflow-y-auto">
+                            <div className="absolute z-10 mt-2 w-64 bg-white border border-gray-200 rounded-sm shadow-lg max-h-64 overflow-y-auto">
                                 <div className="sticky top-0 bg-white p-2 border-b border-gray-200 z-10 flex justify-between items-center">
                                     <div className="relative flex-grow">
                                         <input
@@ -430,7 +430,7 @@ const TableRow = ({
                                             placeholder="Search skills..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm"
                                         />
                                     </div>
                                     <div className="ml-2 flex">
@@ -497,7 +497,7 @@ const TableRow = ({
 
                 <td className="px-6 py-4 whitespace-nowrap">
                     <button 
-                        className={`px-4 py-2 rounded-md font-semibold text-white transition-all duration-200 focus:outline-none ${statusClass}`}
+                        className={`px-4 py-2 rounded-sm font-semibold text-white transition-all duration-200 focus:outline-none ${statusClass}`}
                         onClick={onMainButtonClick}
                     >
                         {getButtonText()}
@@ -517,7 +517,7 @@ const TableRow = ({
                             type="text"
                             value={inputValue}
                             onChange={handleInputChange}
-                            className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                            className="px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                         />
                     </div>
                 }
@@ -533,13 +533,13 @@ const TableRow = ({
                         <p className="text-gray-700 text-sm mb-4">{userModalMessage}</p>
                         <div className="flex gap-2">
                             <button 
-                                className="flex-1 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-all duration-200"
+                                className="flex-1 px-4 py-2 bg-primary text-white rounded-sm hover:bg-primary-dark transition-all duration-200"
                                 onClick={handleUserActionClick}
                             >
                                 {isRemovedUser ? 'Restore' : 'Remove'} {userType === 'applicant' ? 'Applicant' : 'Moderator'}
                             </button>
                             <button 
-                                className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-all duration-200"
+                                className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-sm hover:bg-gray-200 transition-all duration-200"
                                 onClick={() => setShowUserModal(false)}
                             >
                                 Cancel
@@ -562,13 +562,13 @@ const TableRow = ({
                         </p>
                         <div className="flex gap-2">
                             <button 
-                                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-200"
+                                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-sm hover:bg-red-700 transition-all duration-200"
                                 onClick={activeTab === "Applications" ? handleApplicationDeletion : handleDeleteConfirm}
                             >
                                 Yes, Delete
                             </button>
                             <button 
-                                className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-all duration-200"
+                                className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-sm hover:bg-gray-200 transition-all duration-200"
                                 onClick={() => setShowDeleteModal(false)}
                             >
                                 Cancel
@@ -591,7 +591,7 @@ const TableRow = ({
                             value={newModeratorEmail}
                             onChange={(e) => setNewModeratorEmail(e.target.value)}
                             placeholder="Enter moderator email"
-                            className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                            className="px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                         />
                     </div>
                 }

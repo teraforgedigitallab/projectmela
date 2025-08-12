@@ -5,23 +5,31 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from '../firebaseConfig/firebase';
 import { Card, Typography, Button } from '../ui';
 import { ProfileBanner, ProfileHeader, ProfileAbout, ProfileContactInfo, ProfileProfessional, ProfileSkills, ProfileDetails, SavedJobs, ChangePassword, EditProfile } from '../components';
-import { mapFormToFirestore, mapFirestoreToForm } from '../utils/mapFormToFirestore';
+import { mapFirestoreToForm } from '../utils/mapFormToFirestore';
 import useCheckUserSignin from '../hooks/useCheckUserSignin';
 
-// import { skillOptions, genderOptions } from '../data/data';
 
-import { FaRegClipboard, FaGithub, FaLinkedin, FaInstagram, FaFileAlt } from 'react-icons/fa';
+import { FaRegClipboard, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { FaRegEnvelope, FaRegBookmark } from "react-icons/fa6";
 import { PiSignOut } from "react-icons/pi";
 import { IoDocumentTextOutline } from "react-icons/io5";
 
+import { Modal } from '../ui';
+
 const ProfileSidebar = () => {
     const navigate = useNavigate();
+
+    const [showSignoutModal, setShowSignoutModal] = useState(false);
+
+    const initiateSignout = () => {
+        setShowSignoutModal(true);
+    };
 
     const handleSignOut = async () => {
         const auth = getAuth();
         try {
             await signOut(auth);
+            setShowSignoutModal(false);
             navigate('/signin');
         } catch (error) {
             console.error("Error signing out:", error);
@@ -42,7 +50,7 @@ const ProfileSidebar = () => {
         },
         {
             to: "/profile/bookmarks",
-            label: "Bookmarked Jobs",
+            label: "Bookmarked Projects",
             icon: <FaRegBookmark size={16} />,
         },
         {
@@ -69,7 +77,7 @@ const ProfileSidebar = () => {
                             <Button
                                 variant={isActive ? "primary" : "outlined"}
                                 icon={
-                                    <span className={`flex items-center justify-center w-8 h-8 rounded-md ${isActive ? "bg-white text-primary" : "bg-iconbg text-primary"} mr-3`}>
+                                    <span className={`flex items-center justify-center w-8 h-8 rounded-sm ${isActive ? "bg-white text-primary" : "bg-iconbg text-primary"} mr-3`}>
                                         {link.icon}
                                     </span>
                                 }
@@ -81,10 +89,10 @@ const ProfileSidebar = () => {
                     </NavLink>
                 ))}
                 <Button
-                    onClick={handleSignOut}
+                    onClick={initiateSignout}
                     variant="outlined"
                     icon={
-                        <span className="flex items-center justify-center w-8 h-8 rounded-md bg-gray-100 text-red-600 mr-3">
+                        <span className="flex items-center justify-center w-8 h-8 rounded-sm bg-gray-100 text-red-600 mr-3">
                             <PiSignOut size={16} style={{ transform: 'rotate(-90deg)' }} />
                         </span>
                     }
@@ -93,6 +101,19 @@ const ProfileSidebar = () => {
                     Sign Out
                 </Button>
             </div>
+
+            
+            <Modal
+                show={showSignoutModal}
+                onClose={() => setShowSignoutModal(false)}
+                heading="Sign Out"
+                body="Are you sure you want to sign out?"
+                showButtons={true}
+                primaryButtonText="Sign Out"
+                secondaryButtonText="Cancel"
+                onPrimaryClick={handleSignOut}
+                onSecondaryClick={() => setShowSignoutModal(false)}
+            />
         </Card>
     );
 };
@@ -261,12 +282,12 @@ const Profile = () => {
             <Route path="/bookmarks" element={
                 <main className="bg-gray-50">
                     <ProfileBanner
-                        title="Bookmarked Jobs"
-                        subtitle="View and manage your saved jobs."
+                        title="Bookmarked Projects"
+                        subtitle="View and manage your saved projects."
                         breadcrumbs={[
                             { name: "Home", href: "/" },
                             { name: "My Profile", href: "/profile" },
-                            { name: "Bookmarked Jobs", href: "/profile/bookmarks" }
+                            { name: "Bookmarked Projects", href: "/profile/bookmarks" }
                         ]}
                     />
                     <div className="container mx-auto px-4 md:px-40 py-8">

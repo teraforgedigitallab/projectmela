@@ -195,7 +195,7 @@ const AddJob = () => {
   return (
     <main className="bg-gray-50 min-h-screen pb-10">
       <ProfileBanner
-        title="Job Details"
+        title="Project Details"
         subtitle="Business plan draws on a wide range of knowledge from different business disciplines. Business draws on a wide range of different business."
         breadcrumbs={[
           { name: "Home", href: "/" },
@@ -350,7 +350,7 @@ const AddJob = () => {
                 id="projectFile"
                 type="file"
                 onChange={handleFileChange}
-                className="w-full text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-primary file:text-white hover:file:bg-primary-dark"
+                className="w-full text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-medium file:bg-primary file:text-white hover:file:bg-primary-dark"
               />
               {fileError && <p className="text-red-500 text-xs mt-1">{fileError}</p>}
               {file && (

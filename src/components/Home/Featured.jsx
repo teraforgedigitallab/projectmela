@@ -15,12 +15,10 @@ const FeaturedJobCard = ({
     salary,
     description,
 }) => (
-    <div className="relative bg-white rounded-md shadow-sm overflow-hidden mb-8">
+    <div className="relative bg-white rounded-sm shadow-sm overflow-hidden mb-8">
         {/* Featured Tag */}
-        <div className="absolute top-0 right-0 overflow-hidden h-24 w-24 z-100">
-            <div className="bg-primary text-white text-xs font-bold py-2 px-8 transform rotate-45 translate-x-6 -translate-y-1 shadow-md">
-                FEATURED
-            </div>
+        <div className="absolute left-0 top-0 z-20">
+            <span className="featured-ribbon">FEATURED</span>
         </div>
 
         {/* Image */}
@@ -128,14 +126,14 @@ const featuredJobs = [
 
 const Featured = () => {
     return (
-        <section className="py-20 bg-gray-100">
+        <section className="py-10 bg-gray-100">
             <div className="container mx-auto px-4 max-w-6xl">
                 {/* Section Title */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-8">
                     <span className="inline-block bg-primary text-white px-5 py-1.5 rounded-full font-semibold text-xs mb-3 uppercase">
-                        FEATURED JOBS
+                        FEATURED PROJECTS
                     </span>
-                    <h2 className="text-4xl font-bold mb-4 text-gray-900">Browse Featured Jobs</h2>
+                    <h2 className="text-4xl font-bold mb-4 text-gray-900">Browse Featured Projects</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
                     </p>

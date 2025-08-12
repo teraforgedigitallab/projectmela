@@ -9,7 +9,7 @@ const GenderTabs = ({ options, selected, onSelect, label = "Gender" }) => (
         <button
           key={option}
           type="button"
-          className={`px-4 py-2 rounded-md transition-colors
+          className={`px-4 py-2 rounded-sm transition-colors
             ${selected === option
               ? "bg-iconbg text-primary"
               : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-primary hover:text-white hover:border-primary"}

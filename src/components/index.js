@@ -7,13 +7,11 @@ import ApplyProcessArea from "./Home/ApplyProcessArea";
 import JobCategory from "./Home/JobCategory";
 import AboutArea from "./Home/AboutArea";
 import ResumeArea from "./Home/ResumeArea";
-import Projects from "./Home/Projects";
+import Projects from "../pages/Projects";
 import Featured from "./Home/Featured";
 import Testimonials from "./Home/Testimonials";
 import Blogs from "./Home/Blogs";
 import TrustedBy from "./Home/TrustedBy";
-import FilterModal from "./Home/FilterModal";
-import Pagination from "./Home/Pagination";
 
 // Profile Page Imports
 import ProfileBanner from './Profile/ProfileBanner';
@@ -37,6 +35,8 @@ import ChangePassword from "./Auth/ChangePassword";
 import ForgotPassword from "./Auth/ForgotPassword";
 
 import SocialShare from "./SocialShare";
+import FilterModal from "./FilterModal";
+import Pagination from "./Pagination";
 
 // Admin Page Imports
 import AdminHeader from "./Admin/AdminHeader";
@@ -53,6 +53,7 @@ import SectionHeader from "./Legal/SectionHeader";
 import InfoContainer from "./Legal/InfoContainer";
 import TermsInfoContainer from "./Legal/TermsInfoContainer";
 
+
 export {
     Header,
     Footer,
@@ -66,8 +67,6 @@ export {
     Testimonials,
     Blogs,
     TrustedBy,
-    FilterModal,
-    Pagination,
 };
 
 export {
@@ -93,4 +92,4 @@ export { AdminHeader, AdminLogin, AdminNav, TableRow, TableRowUser, StatsCard, S
 
 export { TermsInfoContainer, SectionHeader, InfoContainer };
 
-export { SocialShare };
+export { SocialShare, FilterModal, Pagination };

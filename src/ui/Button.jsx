@@ -11,7 +11,7 @@ const Button = ({
   variant = 'primary',
 }) => {
   const base =
-    'inline-flex items-center justify-center gap-2 font-medium py-2 px-8 rounded-md cursor-pointer transition-all duration-300 ease-in-out disabled:bg-gray-400 disabled:cursor-not-allowed';
+    'inline-flex items-center justify-center gap-2 font-medium py-2 px-8 rounded-sm cursor-pointer transition-all duration-300 ease-in-out disabled:bg-gray-400 disabled:cursor-not-allowed';
 
   const variants = {
     primary: 'bg-primary text-white hover:bg-primary-hover',

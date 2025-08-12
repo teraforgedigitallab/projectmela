@@ -21,7 +21,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <Card className='max-w-4xl mx-auto p-6 mt-10'>
+    <Card className='max-w-4xl mx-auto p-6 my-20'>
       <Typography variant="h5" className="font-bold text-xl mb-2">Forgot your password ? </Typography>
       <Typography variant="p" className="text-black mb-4">
         No worries! 
@@ -39,7 +39,7 @@ const ForgotPassword = () => {
           placeholder="Enter your email"
           required
         />
-        <Button type="submit" className="mt-2 w-full">
+        <Button type="submit" className="mt-2">
           Reset Password
         </Button>
       </form>

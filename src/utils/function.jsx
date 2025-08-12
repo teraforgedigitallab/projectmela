@@ -183,6 +183,9 @@ export const handleShareToSocials = (platform, shareLink) => {
             case 'instagram':
                 url = `https://www.instagram.com/?url=${encodeURIComponent(shareLink)}`;
                 break;
+            case 'linkedin':
+                url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareLink)}`;
+                break;
             default:
                 return;
         }

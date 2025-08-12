@@ -43,8 +43,8 @@ const JobCategory = () => {
     <section className="bg-gray-100 py-16">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center mb-8">
-          <div className="bg-primary text-white rounded-md px-5 py-2 text-sm font-semibold mb-4 shadow">
-            JOB CATEGORY
+          <div className="bg-primary text-white rounded-sm px-5 py-2 text-sm font-semibold mb-4 shadow">
+            PROJECT CATEGORY
           </div>
           <h2 className="text-heading font-bold text-2xl md:text-3xl text-center mb-2">
             Choose Your Desire Category
@@ -54,7 +54,7 @@ const JobCategory = () => {
             There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
           </p>
         </div>
-        <div className="bg-white rounded-md shadow-lg p-6 md:p-10 max-w-6xl mx-auto">
+        <div className="bg-white rounded-sm shadow-lg p-6 md:p-10 max-w-6xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {categories.map((cat, idx) => (
               <CategoryCard

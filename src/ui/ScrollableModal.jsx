@@ -42,13 +42,13 @@ const ScrollableModal = ({
                     {showButtons && (
                         <div className="flex justify-end px-6 py-4 border-t border-gray-200 bg-gray-50">
                             <button 
-                                className="px-4 py-2 mr-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                                className="px-4 py-2 mr-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-sm shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                                 onClick={onSecondaryButtonClicked}
                             >
                                 {secondaryButtonText}
                             </button>
                             <button 
-                                className="px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                                className="px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-sm shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                                 onClick={onPrimaryButtonClicked}
                             >
                                 {primaryButtonText}

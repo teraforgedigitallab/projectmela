@@ -879,21 +879,21 @@ const Admin = () => {
                                                 <div className="flex gap-2">
                                                     <input
                                                         type="number"
-                                                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+                                                        className="w-full rounded-sm border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
                                                         placeholder="Min"
                                                         value={minXPFilter}
                                                         onChange={(e) => setMinXPFilter(e.target.value)}
                                                     />
                                                     <input
                                                         type="number"
-                                                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+                                                        className="w-full rounded-sm border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
                                                         placeholder="Max"
                                                         value={maxXPFilter}
                                                         onChange={(e) => setMaxXPFilter(e.target.value)}
                                                     />
                                                     {(minXPFilter || maxXPFilter) && (
                                                         <button
-                                                            className="p-2 bg-gray-200 rounded-md hover:bg-gray-300"
+                                                            className="p-2 bg-gray-200 rounded-sm hover:bg-gray-300"
                                                             onClick={() => {
                                                                 setMinXPFilter('');
                                                                 setMaxXPFilter('');
@@ -910,7 +910,7 @@ const Admin = () => {
                                                 <div className="flex gap-2">
                                                     <input
                                                         type="text"
-                                                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+                                                        className="w-full rounded-sm border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
                                                         placeholder="Type location and press Enter"
                                                         onKeyDown={(e) => {
                                                             if (e.key === 'Enter' && e.target.value.trim()) {
@@ -925,7 +925,7 @@ const Admin = () => {
                                                     />
                                                     {locationFilter.length > 0 && (
                                                         <button
-                                                            className="p-2 bg-gray-200 rounded-md hover:bg-gray-300"
+                                                            className="p-2 bg-gray-200 rounded-sm hover:bg-gray-300"
                                                             onClick={() => setLocationFilter([])}
                                                         >
                                                             <FaTimes size={16} />
@@ -955,7 +955,7 @@ const Admin = () => {
                                                 <div className="flex gap-2">
                                                     <input
                                                         type="text"
-                                                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+                                                        className="w-full rounded-sm border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
                                                         placeholder="Type institute and press Enter"
                                                         onKeyDown={(e) => {
                                                             if (e.key === 'Enter' && e.target.value.trim()) {
@@ -970,7 +970,7 @@ const Admin = () => {
                                                     />
                                                     {educationFilter.length > 0 && (
                                                         <button
-                                                            className="p-2 bg-gray-200 rounded-md hover:bg-gray-300"
+                                                            className="p-2 bg-gray-200 rounded-sm hover:bg-gray-300"
                                                             onClick={() => setEducationFilter([])}
                                                         >
                                                             <FaTimes size={16} />
@@ -1006,7 +1006,7 @@ const Admin = () => {
                                                 />
                                                 {selectedSkills.length > 0 && (
                                                     <button
-                                                        className="ml-3 p-2 bg-gray-200 rounded-md hover:bg-gray-300"
+                                                        className="ml-3 p-2 bg-gray-200 rounded-sm hover:bg-gray-300"
                                                         onClick={() => setSelectedSkills([])}
                                                     >
                                                         <FaTimes size={16} />
@@ -1020,7 +1020,7 @@ const Admin = () => {
                                 <div className="flex mt-4 space-x-3">
                                     {activeTab === 'Users' && (
                                         <button
-                                            className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                                            className="px-4 py-2 bg-primary text-white rounded-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                                             onClick={() => {
                                                 setModalHeading('AI Search');
                                                 setModalMessage('Describe the candidate you are looking for:');
@@ -1032,7 +1032,7 @@ const Admin = () => {
                                     )}
 
                                     <button
-                                        className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                                        className="px-4 py-2 bg-primary text-white rounded-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                                         onClick={() => {
                                             setModalHeading('AI Suggestion');
                                             setModalMessage('Enter Project ID:');
@@ -1044,7 +1044,7 @@ const Admin = () => {
 
                                     {isAIFilterApplied && (
                                         <button
-                                            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
+                                            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
                                             onClick={() => clearAIFilters()}
                                         >
                                             Clear All Filters
@@ -1265,7 +1265,7 @@ const Admin = () => {
                                                 </div>
 
                                                 {candidate.aiAnalysis && (
-                                                    <div className="mt-3 bg-yellow-50 p-3 rounded-md">
+                                                    <div className="mt-3 bg-yellow-50 p-3 rounded-sm">
                                                         <p className="font-medium">AI Analysis:</p>
                                                         <p className="mt-1">{candidate.aiAnalysis}</p>
                                                         <p className="mt-2">

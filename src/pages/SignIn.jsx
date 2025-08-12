@@ -153,7 +153,7 @@ const SignIn = () => {
     return (
         <div className="min-h-screen bg-gray-100">
             <div className="flex-1 flex items-center justify-center py-12 px-4">
-                <div className="w-full max-w-xl bg-white rounded-2xl shadow-2xl p-8">
+                <div className="w-full max-w-xl bg-white rounded-sm shadow-2xl p-8">
                     <h1 className="text-2xl font-semibold text-black mb-2">{isSignUp ? 'Sign up on Project Mela' : 'Sign in to Project Mela!'}</h1>
                     <p className="text-gray-600 mb-6">Join the ultimate project platform to boost your skills, earn money, and work on exciting tech projects with fellow programmers.</p>
                     <form onSubmit={handleSignInClick} className="space-y-4">

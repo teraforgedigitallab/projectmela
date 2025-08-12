@@ -16,7 +16,7 @@ const IconButton = ({ icon, href, onClick, ariaLabel, className = '' }) => {
   const commonClasses = `
     h-10 w-10 flex items-center justify-center
     bg-gray-200 text-dark-2
-    rounded-md
+    rounded-sm
     hover:bg-primary hover:text-white
     transition-all duration-300
     focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2

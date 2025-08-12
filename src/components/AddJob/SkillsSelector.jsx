@@ -21,11 +21,11 @@ const SkillsSelector = ({ selectedSkills, setSelectedSkills, options }) => {
 
     return (
         <div className="relative">
-            <div className="flex flex-wrap gap-2 mb-2 p-2 border border-gray-300 rounded-md bg-white min-h-[42px]">
+            <div className="flex flex-wrap gap-2 mb-2 p-2 border border-gray-300 rounded-sm bg-white min-h-[42px]">
                 {selectedSkills.map(skill => (
                     <div
                         key={skill}
-                        className="flex items-center bg-gray-100 text-gray-800 px-3 py-1 rounded-md"
+                        className="flex items-center bg-gray-100 text-gray-800 px-3 py-1 rounded-sm"
                     >
                         <span>{skill}</span>
                         <button
@@ -49,7 +49,7 @@ const SkillsSelector = ({ selectedSkills, setSelectedSkills, options }) => {
             </div>
 
             {showDropdown && filteredOptions.length > 0 && (
-                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-sm shadow-lg max-h-60 overflow-auto">
                     {filteredOptions.map(option => (
                         <div
                             key={option}

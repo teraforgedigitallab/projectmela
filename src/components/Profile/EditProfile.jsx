@@ -11,6 +11,8 @@ import { FileUploadBox } from '../../components';
 import pdfToText from 'react-pdftotext';
 import { processResumeWithAI } from '../../utils/aiLogic';
 import { useNavigate } from 'react-router-dom';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const EditProfile = ({ profileData, onProfileUpdate }) => {
     const navigate = useNavigate();
@@ -44,12 +46,28 @@ const EditProfile = ({ profileData, onProfileUpdate }) => {
     // AI Resume Upload states
     const [showFileUpload, setShowFileUpload] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
+    const [phoneError, setPhoneError] = useState('');
     const [typingText, setTypingText] = useState('');
     const processingMessage = "Processing your resume...";
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    function countDigits(str) {
+        return (str.match(/\d/g) || []).length;
+    }
+
+    // Handle phone input
+    const handlePhoneChange = (value, country) => {
+        setFormData(prev => ({ ...prev, phone: value }));
+        // Basic validation: at least 10 digits
+        if (countDigits(value) < 10) {
+            setPhoneError('Enter a valid phone number');
+        } else {
+            setPhoneError('');
+        }
     };
 
     useEffect(() => {
@@ -141,7 +159,7 @@ const EditProfile = ({ profileData, onProfileUpdate }) => {
                 <Button
                     variant="primary"
                     onClick={handleAIGenerateClick}
-                    className="px-6 py-2 rounded-md font-semibold bg-primary text-white hover:bg-blue-700 transition-colors"
+                    className="px-6 py-2 rounded-sm font-semibold bg-primary text-white hover:bg-blue-700 transition-colors"
                     style={{ minWidth: 160 }}
                 >
                     AI Generate
@@ -200,15 +218,28 @@ const EditProfile = ({ profileData, onProfileUpdate }) => {
                         required
                         disabled
                     />
-                    <InputField
-                        label="Phone Number"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="Enter your phone number"
-                        required
-                    />
+                    <div className="">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Phone<span className="text-red-500">*</span>
+                        </label>
+                        <PhoneInput
+                            country="in"
+                            value={formData.phone}
+                            onChange={handlePhoneChange}
+                            inputStyle={{
+                                width: '100%',
+                                height: '48px',
+                                borderRadius: '0.5rem',
+                                borderColor: '#E5E7EB'
+                            }}
+                            inputProps={{
+                                name: 'phone',
+                                required: true,
+                                autoFocus: false,
+                            }}
+                        />
+                        {phoneError && <p className="text-red-500 text-xs mt-1">{phoneError}</p>}
+                    </div>
                     <InputField
                         label="Date of Birth"
                         name="dateOfBirth"
@@ -270,15 +301,6 @@ const EditProfile = ({ profileData, onProfileUpdate }) => {
                         value={formData.designation}
                         onChange={handleChange}
                         placeholder="Headline (eg. Front-end Developer)"
-                        required
-                    />
-                    <InputField
-                        label="Per Hour"
-                        name="perHour"
-                        type="number"
-                        value={formData.perHour}
-                        onChange={handleChange}
-                        placeholder="Salary eg. 85"
                         required
                     />
                 </div>
@@ -385,7 +407,7 @@ const EditProfile = ({ profileData, onProfileUpdate }) => {
                     <button
                         type="submit"
                         disabled={saving}
-                        className="bg-primary text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
+                        className="bg-primary text-white px-6 py-3 rounded-sm hover:bg-blue-700 transition-colors"
                     >
                         {saving ? "Saving..." : "Save Changes"}
                     </button>

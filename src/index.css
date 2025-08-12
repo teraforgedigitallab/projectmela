@@ -10,6 +10,10 @@
   --color-text-body: #586982;
   --color-text-heading: #0d233e;
 
+  --color-gold: #ffcc33;
+  --color-ribbon: #2042e3c8;
+
+
   /* Neutral Colors */
   --color-white: #ffffff;
   --color-black: #000000;
@@ -83,3 +87,22 @@ body {
   font-weight: 600;
   color: var(--color-primary);
 }
+
+.featured-ribbon {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  background: var(--color-ribbon);
+  color: var(--color-white);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 5px 28px 5px 16px;
+  z-index: 30;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(32, 66, 227, 0.08);
+  height: 32px;
+  display: flex;
+  align-items: center;
+  clip-path: polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%);
+}
+

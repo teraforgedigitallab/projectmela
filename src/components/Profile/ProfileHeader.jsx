@@ -23,7 +23,7 @@ const ProfileHeader = ({ profileData, socials }) => (
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gray-100 p-2 rounded-md text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              className="bg-gray-100 p-2 rounded-sm text-gray-800 hover:bg-primary hover:text-white transition-colors"
               aria-label={social.name}
             >
               {social.icon}

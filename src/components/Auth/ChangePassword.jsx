@@ -44,7 +44,7 @@ const ChangePassword = () => {
           placeholder="Enter your email"
           required
         />
-        <Button type="submit" className="mt-2 w-full">
+        <Button type="submit" className="mt-2">
           Change Password
         </Button>
       </form>

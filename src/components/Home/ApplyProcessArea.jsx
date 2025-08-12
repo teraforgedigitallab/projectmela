@@ -15,7 +15,7 @@ const steps = [
   },
   {
     icon: <PiBriefcaseBold />,
-    title: "Apply for Dream Job",
+    title: "Apply for Dream Project",
     desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
   },
 ];

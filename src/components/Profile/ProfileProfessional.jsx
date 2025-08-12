@@ -9,9 +9,11 @@ const ProfileProfessional = ({ profileData }) => (
         <Typography variant="p" className="text-gray-500">Professional Title</Typography>
         <Typography variant="p">{profileData.designation || "N/A"}</Typography>
       </div>
-      <div>
-        <Typography variant="p" className="text-gray-500">Per Hour</Typography>
-        <Typography variant="p">{profileData.perHour || "N/A"}</Typography>
+     <div>
+        <Typography variant="p" className="text-gray-500">Resume/CV</Typography>
+        <a href={profileData.resumeLink || "#"} target="_blank" rel="noopener noreferrer" className="text-primary underline">
+          {profileData.resumeLink || "N/A"}
+        </a>
       </div>
       <div>
         <Typography variant="p" className="text-gray-500">Educational Qualification</Typography>
@@ -21,12 +23,7 @@ const ProfileProfessional = ({ profileData }) => (
         <Typography variant="p" className="text-gray-500">Educational Institute</Typography>
         <Typography variant="p">{profileData.educationalInstitute || "N/A"}</Typography>
       </div>
-      <div>
-        <Typography variant="p" className="text-gray-500">Resume/CV</Typography>
-        <a href={profileData.resumeLink || "#"} target="_blank" rel="noopener noreferrer" className="text-primary underline">
-          {profileData.resumeLink || "N/A"}
-        </a>
-      </div>
+      
     </div>
   </>
 );

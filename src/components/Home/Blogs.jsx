@@ -63,7 +63,7 @@ const Blogs = () => {
         {
             id: 1,
             image: blog1,
-            title: 'The Internet Is A Job Seeker Most Crucial Success',
+            title: 'The Internet Is A Project Seeker Most Crucial Success',
             category: 'Job Skills',
             date: '12-09-2023',
             views: '55',
@@ -83,7 +83,7 @@ const Blogs = () => {
         {
             id: 3,
             image: blog3,
-            title: 'We\'ve Weeded Through Hundreds Of Job Hunting',
+            title: 'We\'ve Weeded Through Hundreds Of Project Hunting',
             category: 'Future Plan',
             date: '09-05-2023',
             views: '55',

@@ -44,7 +44,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9 }}
             >
-              Creating a beautiful job website is not easy <br /> always. To make your life easier, we are introducing <br /> Project Mela.
+              Creating a beautiful project website is not easy <br /> always. To make your life easier, we are introducing <br /> Project Mela.
             </Typography>
 
             <motion.div
@@ -63,7 +63,7 @@ const Hero = () => {
                     id="keyword"
                     name="keyword"
                     type="text"
-                    placeholder="What jobs you want?"
+                    placeholder="What projects you want?"
                     className="w-full border-none text-gray-700 text-xs font-normal p-0 h-auto bg-transparent focus:outline-none"
                     ref={keywordRef}
                   />

@@ -3,9 +3,9 @@ import { handleShareToSocials } from '../utils/function';
 
 const SocialShare = ({ shareLink }) => {
     return (
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+        <div className="bg-white rounded-sm shadow-sm p-6 mb-4">
             <div className="flex items-center justify-between">
-                <h3 className="font-semibold text-gray-800">Share this job</h3>
+                <h3 className="font-semibold text-gray-800">Share this Project</h3>
                 <div className="flex gap-2">
                     <button
                         onClick={() => handleShareToSocials('twitter', shareLink)}

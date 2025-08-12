@@ -12,7 +12,7 @@ const FileUploadBox = ({ onClose, onFileSelect }) => {
 
   return (
     <div
-      className="relative bg-white p-6 rounded-xl shadow-xl w-full max-w-md mx-auto"
+      className="relative bg-white p-6 rounded-sm shadow-xl w-full max-w-md mx-auto"
       style={{ boxShadow: "var(--shadow-lg)" }}
     >
       <button
@@ -26,7 +26,7 @@ const FileUploadBox = ({ onClose, onFileSelect }) => {
       <form className="flex flex-col items-center justify-center w-full">
         <label
           htmlFor="file_input"
-          className="cursor-pointer bg-[var(--color-gray-100)] hover:bg-[var(--color-gray-200)] border-2 border-dashed border-[var(--color-gray-500)] rounded-3xl px-8 py-8 flex flex-col items-center justify-center shadow-md transition w-full"
+          className="cursor-pointer bg-[var(--color-gray-100)] hover:bg-[var(--color-gray-200)] border-2 border-dashed border-[var(--color-gray-500)] rounded-sm px-8 py-8 flex flex-col items-center justify-center shadow-md transition w-full"
         >
           <div className="flex flex-col items-center gap-2">
             <svg

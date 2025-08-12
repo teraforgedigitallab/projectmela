@@ -33,7 +33,7 @@ const Modal = ({
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 bg-opacity-40">
-            <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative">
+            <div className="bg-white rounded-sm shadow-2xl max-w-md w-full p-6 relative">
                 <button
                     className="absolute top-3 right-3 text-gray-400 hover:text-primary transition"
                     onClick={onClose}
