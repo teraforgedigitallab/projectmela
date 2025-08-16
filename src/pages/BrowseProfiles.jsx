@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { LuMapPin, LuCoins } from 'react-icons/lu';
-import { FaFilter, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import React, { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
+import { LuMapPin, LuCoins } from "react-icons/lu";
+import { FaFilter, FaGithub, FaLinkedin, FaInstagram, FaGlobe } from "react-icons/fa";
 import { IoDocumentTextOutline } from "react-icons/io5";
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseConfig/firebase';
-import { Pagination, ProfileBanner } from '../components';
-import { Button, InputField } from '../ui';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig/firebase";
+import { Pagination, ProfileBanner } from "../components";
+import { Button, InputField } from "../ui";
 
 // Custom Filter Modal Component
 const CustomFilterModal = ({
@@ -16,63 +16,66 @@ const CustomFilterModal = ({
   currentFilters,
   onApply,
   positions,
-  allSkills
+  allSkills,
 }) => {
   const [tempFilters, setTempFilters] = useState(currentFilters);
-  const [selectedPosition, setSelectedPosition] = useState('');
+  const [selectedPosition, setSelectedPosition] = useState("");
   const [selectedSkills, setSelectedSkills] = useState([]);
-  const [skillSearch, setSkillSearch] = useState('');
+  const [skillSearch, setSkillSearch] = useState("");
 
   // Update filteredSkills to handle the new object format
-  const filteredSkills = useMemo(() =>
-    allSkills.filter(skill =>
-      skill.label.toLowerCase().includes(skillSearch.toLowerCase())
-    ),
+  const filteredSkills = useMemo(
+    () =>
+      allSkills.filter((skill) =>
+        skill.label.toLowerCase().includes(skillSearch.toLowerCase())
+      ),
     [allSkills, skillSearch]
   );
 
   useEffect(() => {
     setTempFilters(currentFilters);
-    setSelectedPosition(currentFilters.position || '');
+    setSelectedPosition(currentFilters.position || "");
     setSelectedSkills(currentFilters.skills ? [currentFilters.skills] : []);
   }, [currentFilters, isOpen]);
 
   const handleChange = (id, value) => {
-    setTempFilters(prev => ({
+    setTempFilters((prev) => ({
       ...prev,
-      [id]: value
+      [id]: value,
     }));
   };
 
   const handlePositionSelect = (position) => {
     setSelectedPosition(position);
-    handleChange('position', position);
+    handleChange("position", position);
   };
 
   const handleSkillSelect = (skill) => {
     if (!selectedSkills.includes(skill.value)) {
       const newSkills = [...selectedSkills, skill.value];
       setSelectedSkills(newSkills);
-      handleChange('skills', skill.value);
+      handleChange("skills", skill.value);
     }
-    setSkillSearch('');
+    setSkillSearch("");
   };
 
   const handleRemoveSkill = (skillToRemove) => {
-    setSelectedSkills(prev => prev.filter(skill => skill !== skillToRemove));
-    handleChange('skills', '');
+    setSelectedSkills((prev) =>
+      prev.filter((skill) => skill !== skillToRemove)
+    );
+    handleChange("skills", "");
   };
 
   const handleReset = () => {
     const resetFilters = {
-      country: '',
-      state: '',
-      city: '',
-      position: '',
-      skills: ''
+      country: "",
+      state: "",
+      city: "",
+      position: "",
+      skills: "",
     };
     setTempFilters(resetFilters);
-    setSelectedPosition('');
+    setSelectedPosition("");
     setSelectedSkills([]);
     onApply(resetFilters);
   };
@@ -96,13 +99,14 @@ const CustomFilterModal = ({
             {/* Header */}
             <div className="border-b border-gray-200 px-6 py-4">
               <div className="flex items-center justify-between">
-                <h3 className="text-xl font-semibold text-gray-900">Filter Profiles</h3>
+                <h3 className="text-xl font-semibold text-gray-900">
+                  Filter Profiles
+                </h3>
                 <button
                   onClick={onClose}
                   className="text-gray-400 hover:text-gray-500 focus:outline-none p-2"
                 >
-                  <span className="sr-only">Close</span>
-                  ✕
+                  <span className="sr-only">Close</span>✕
                 </button>
               </div>
             </div>
@@ -120,8 +124,10 @@ const CustomFilterModal = ({
                           {option.label}
                         </label>
                         <select
-                          value={tempFilters[option.id] || ''}
-                          onChange={(e) => handleChange(option.id, e.target.value)}
+                          value={tempFilters[option.id] || ""}
+                          onChange={(e) =>
+                            handleChange(option.id, e.target.value)
+                          }
                           className="block w-full rounded-sm border-gray-300 shadow-sm focus:border-primary focus:ring-primary text-sm py-2.5"
                         >
                           {option.options.map((opt) => (
@@ -143,10 +149,11 @@ const CustomFilterModal = ({
                       <button
                         key={position}
                         onClick={() => handlePositionSelect(position)}
-                        className={`px-4 py-2 rounded-full text-sm transition-all ${selectedPosition === position
-                          ? 'bg-primary text-white shadow-md'
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          }`}
+                        className={`px-4 py-2 rounded-full text-sm transition-all ${
+                          selectedPosition === position
+                            ? "bg-primary text-white shadow-md"
+                            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        }`}
                       >
                         {position}
                       </button>
@@ -229,30 +236,39 @@ const CustomFilterModal = ({
 const CustomUserModal = ({ user, onClose, show }) => {
   if (!show) return null;
 
-  const fullName = user ? `${user.FirstName || ''} ${user.LastName || ''}` : 'User Profile';
+  const fullName = user
+    ? `${user.FirstName || ""} ${user.LastName || ""}`
+    : "User Profile";
 
-  const socials = user ? [
-    user.ResumeLink && {
-      name: "Resume",
-      url: user.ResumeLink,
-      icon: <IoDocumentTextOutline size={22} />,
-    },
-    user.GithubLink && {
-      name: "GitHub",
-      url: user.GithubLink,
-      icon: <FaGithub size={20} />,
-    },
-    user.LinkedinLink && {
-      name: "LinkedIn",
-      url: user.LinkedinLink,
-      icon: <FaLinkedin size={20} />,
-    },
-    user.InstagramLink && {
-      name: "Instagram",
-      url: user.InstagramLink,
-      icon: <FaInstagram size={20} />,
-    },
-  ].filter(Boolean) : [];
+  const socials = user
+    ? [
+        user.ResumeLink && {
+          name: "Resume",
+          url: user.ResumeLink,
+          icon: <IoDocumentTextOutline size={22} />,
+        },
+        user.GithubLink && {
+          name: "GitHub",
+          url: user.GithubLink,
+          icon: <FaGithub size={20} />,
+        },
+        user.LinkedinLink && {
+          name: "LinkedIn",
+          url: user.LinkedinLink,
+          icon: <FaLinkedin size={20} />,
+        },
+        user.InstagramLink && {
+          name: "Instagram",
+          url: user.InstagramLink,
+          icon: <FaInstagram size={20} />,
+        },
+        user.websiteUrl && {
+          name: "Website",
+          url: user.websiteUrl,
+          icon: <FaGlobe size={20} />,
+        },
+      ].filter(Boolean)
+    : [];
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/30 flex items-center justify-center p-4">
@@ -272,13 +288,17 @@ const CustomUserModal = ({ user, onClose, show }) => {
               <div className="flex flex-col md:flex-row gap-6 mb-6">
                 <div className="w-32 h-32 mx-auto md:mx-0 flex-shrink-0">
                   <img
-                    src={user.profilePic || "/assets/images/resume/placeholder.jpg"}
+                    src={
+                      user.profilePic || "/assets/images/resume/placeholder.jpg"
+                    }
                     alt={fullName}
                     className="w-full h-full object-cover rounded-full"
                   />
                 </div>
                 <div className="flex-grow">
-                  <p className="text-gray-600 font-medium">{user.Designation}</p>
+                  <p className="text-gray-600 font-medium">
+                    {user.Designation}
+                  </p>
 
                   <div className="flex items-center mt-2">
                     <LuCoins className="text-yellow-500 mr-2" />
@@ -288,7 +308,13 @@ const CustomUserModal = ({ user, onClose, show }) => {
                   <div className="flex items-center mt-2">
                     <LuMapPin className="text-gray-500 mr-2" />
                     <span>
-                      {[user.normalizedCity, user.normalizedState, user.normalizedCountry].filter(Boolean).join(", ")}
+                      {[
+                        user.normalizedCity,
+                        user.normalizedState,
+                        user.normalizedCountry,
+                      ]
+                        .filter(Boolean)
+                        .join(", ")}
                     </span>
                   </div>
 
@@ -297,7 +323,8 @@ const CustomUserModal = ({ user, onClose, show }) => {
                       <span className="font-medium">Education: </span>
                       <span>
                         {user.educationalQualification}
-                        {user.educationalInstitute && ` - ${user.educationalInstitute}`}
+                        {user.educationalInstitute &&
+                          ` - ${user.educationalInstitute}`}
                       </span>
                     </div>
                   )}
@@ -362,7 +389,9 @@ const CustomUserModal = ({ user, onClose, show }) => {
                 {user.MyExperience ? (
                   <p className="text-gray-700">{user.MyExperience}</p>
                 ) : (
-                  <p className="text-gray-500">No experience information available</p>
+                  <p className="text-gray-500">
+                    No experience information available
+                  </p>
                 )}
               </div>
 
@@ -372,12 +401,14 @@ const CustomUserModal = ({ user, onClose, show }) => {
                 {user.PastProjects ? (
                   <p className="text-gray-700">{user.PastProjects}</p>
                 ) : (
-                  <p className="text-gray-500">No past projects information available</p>
+                  <p className="text-gray-500">
+                    No past projects information available
+                  </p>
                 )}
               </div>
 
               {/* Website */}
-              <div className="mb-6">
+              {/* <div className="mb-6">
                 <h3 className="text-lg font-semibold mb-2">Website</h3>
                 {user.websiteUrl ? (
                   <a
@@ -391,7 +422,7 @@ const CustomUserModal = ({ user, onClose, show }) => {
                 ) : (
                   <p className="text-gray-500">No website available</p>
                 )}
-              </div>
+              </div> */}
             </>
           ) : (
             <div className="text-center py-8">
@@ -406,12 +437,13 @@ const CustomUserModal = ({ user, onClose, show }) => {
 
 // Helper function to normalize location strings (trim and proper case)
 const normalizeLocation = (location) => {
-  if (!location || typeof location !== 'string') return '';
-  
-  return location.trim()
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ');
+  if (!location || typeof location !== "string") return "";
+
+  return location
+    .trim()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
 };
 
 const BrowseProfiles = () => {
@@ -423,14 +455,14 @@ const BrowseProfiles = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [showFilter, setShowFilter] = useState(false);
   const [filters, setFilters] = useState({
-    country: '',
-    state: '',
-    city: '',
-    position: '',
-    skills: ''
+    country: "",
+    state: "",
+    city: "",
+    position: "",
+    skills: "",
   });
 
   const usersPerPage = 10;
@@ -448,14 +480,14 @@ const BrowseProfiles = () => {
           const normalizedCountry = normalizeLocation(data.country);
           const normalizedState = normalizeLocation(data.state);
           const normalizedCity = normalizeLocation(data.city);
-          
+
           fetchedUsers.push({
             id: doc.id,
             ...data,
             // Keep original data for backwards compatibility
-            country: data.country?.trim() || '',
-            state: data.state?.trim() || '',
-            city: data.city?.trim() || '',
+            country: data.country?.trim() || "",
+            state: data.state?.trim() || "",
+            city: data.city?.trim() || "",
             // Add normalized data for consistent filtering and display
             normalizedCountry,
             normalizedState,
@@ -476,22 +508,25 @@ const BrowseProfiles = () => {
     fetchAllUsers();
   }, []);
 
-  const positions = useMemo(() =>
-    Array.from(new Set(users.map(u => u.Designation).filter(Boolean))).sort(),
+  const positions = useMemo(
+    () =>
+      Array.from(
+        new Set(users.map((u) => u.Designation).filter(Boolean))
+      ).sort(),
     [users]
   );
 
   // Dynamically generate unique skills from users
   const allSkills = useMemo(() => {
     const skillSet = new Set();
-    users.forEach(user => {
+    users.forEach((user) => {
       if (Array.isArray(user.Skills)) {
-        user.Skills.forEach(skill => skillSet.add(skill));
+        user.Skills.forEach((skill) => skillSet.add(skill));
       }
     });
     return Array.from(skillSet)
       .sort()
-      .map(skill => ({ value: skill, label: skill }));
+      .map((skill) => ({ value: skill, label: skill }));
   }, [users]);
 
   // Filter options with normalized and deduplicated locations
@@ -501,9 +536,12 @@ const BrowseProfiles = () => {
     const stateMap = new Map();
     const cityMap = new Map();
 
-    users.forEach(user => {
+    users.forEach((user) => {
       if (user.normalizedCountry) {
-        countryMap.set(user.normalizedCountry.toLowerCase(), user.normalizedCountry);
+        countryMap.set(
+          user.normalizedCountry.toLowerCase(),
+          user.normalizedCountry
+        );
       }
       if (user.normalizedState) {
         stateMap.set(user.normalizedState.toLowerCase(), user.normalizedState);
@@ -520,32 +558,32 @@ const BrowseProfiles = () => {
 
     return [
       {
-        id: 'country',
-        label: 'Country',
-        type: 'select',
+        id: "country",
+        label: "Country",
+        type: "select",
         options: [
-          { value: '', label: 'All Countries' },
-          ...uniqueCountries.map(c => ({ value: c, label: c }))
-        ]
+          { value: "", label: "All Countries" },
+          ...uniqueCountries.map((c) => ({ value: c, label: c })),
+        ],
       },
       {
-        id: 'state',
-        label: 'State',
-        type: 'select',
+        id: "state",
+        label: "State",
+        type: "select",
         options: [
-          { value: '', label: 'All States' },
-          ...uniqueStates.map(s => ({ value: s, label: s }))
-        ]
+          { value: "", label: "All States" },
+          ...uniqueStates.map((s) => ({ value: s, label: s })),
+        ],
       },
       {
-        id: 'city',
-        label: 'City',
-        type: 'select',
+        id: "city",
+        label: "City",
+        type: "select",
         options: [
-          { value: '', label: 'All Cities' },
-          ...uniqueCities.map(c => ({ value: c, label: c }))
-        ]
-      }
+          { value: "", label: "All Cities" },
+          ...uniqueCities.map((c) => ({ value: c, label: c })),
+        ],
+      },
     ];
   }, [users]);
 
@@ -555,36 +593,44 @@ const BrowseProfiles = () => {
       let result = [...users];
 
       // Apply search filter
-      if (searchTerm.trim() !== '') {
+      if (searchTerm.trim() !== "") {
         const searchLower = searchTerm.toLowerCase();
-        result = result.filter(user => {
-          const fullName = `${user.FirstName || ''} ${user.LastName || ''}`.toLowerCase();
-          const designation = (user.Designation || '').toLowerCase();
-          return fullName.includes(searchLower) || designation.includes(searchLower);
+        result = result.filter((user) => {
+          const fullName = `${user.FirstName || ""} ${
+            user.LastName || ""
+          }`.toLowerCase();
+          const designation = (user.Designation || "").toLowerCase();
+          return (
+            fullName.includes(searchLower) || designation.includes(searchLower)
+          );
         });
       }
 
       // Apply location filters using normalized data
       if (filters.country) {
-        result = result.filter(user => user.normalizedCountry === filters.country);
+        result = result.filter(
+          (user) => user.normalizedCountry === filters.country
+        );
       }
 
       if (filters.state) {
-        result = result.filter(user => user.normalizedState === filters.state);
+        result = result.filter(
+          (user) => user.normalizedState === filters.state
+        );
       }
 
       if (filters.city) {
-        result = result.filter(user => user.normalizedCity === filters.city);
+        result = result.filter((user) => user.normalizedCity === filters.city);
       }
 
       // Apply position filter
       if (filters.position) {
-        result = result.filter(user => user.Designation === filters.position);
+        result = result.filter((user) => user.Designation === filters.position);
       }
 
       // Apply skills filter
       if (filters.skills) {
-        result = result.filter(user => {
+        result = result.filter((user) => {
           if (!user.Skills) return false;
           return user.Skills.includes(filters.skills);
         });
@@ -625,7 +671,7 @@ const BrowseProfiles = () => {
         subtitle="Discover talented professionals and connect with them for your projects."
         breadcrumbs={[
           { name: "Home", href: "/" },
-          { name: "Projects", href: "/projects" }
+          { name: "Projects", href: "/projects" },
         ]}
       />
 
@@ -678,20 +724,38 @@ const BrowseProfiles = () => {
             <>
               {filteredUsers.length === 0 ? (
                 <div className="bg-white rounded-sm shadow-md p-8 text-center">
-                  <h3 className="text-xl font-medium text-gray-800 mb-2">No profiles found</h3>
-                  <p className="text-gray-600">Try adjusting your search or filter criteria.</p>
+                  <h3 className="text-xl font-medium text-gray-800 mb-2">
+                    No profiles found
+                  </h3>
+                  <p className="text-gray-600">
+                    Try adjusting your search or filter criteria.
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-6">
                   {getCurrentPageUsers().map((user) => {
-                    const fullName = `${user.FirstName || ''} ${user.LastName || ''}`;
-                    const location = [user.normalizedCity, user.normalizedState, user.normalizedCountry].filter(Boolean).join(", ");
+                    const fullName = `${user.FirstName || ""} ${
+                      user.LastName || ""
+                    }`;
+                    const location = [
+                      user.normalizedCity,
+                      user.normalizedState,
+                      user.normalizedCountry,
+                    ]
+                      .filter(Boolean)
+                      .join(", ");
 
                     return (
-                      <div key={user.id} className="bg-white rounded-sm shadow-md p-6 flex flex-col md:flex-row gap-6">
+                      <div
+                        key={user.id}
+                        className="bg-white rounded-sm shadow-md p-6 flex flex-col md:flex-row gap-6"
+                      >
                         <div className="w-28 h-28 mx-auto md:mx-0 flex-shrink-0">
                           <img
-                            src={user.profilePic || "/assets/images/resume/placeholder.jpg"}
+                            src={
+                              user.profilePic ||
+                              "/assets/images/resume/placeholder.jpg"
+                            }
                             alt={fullName}
                             className="w-full h-full object-cover rounded-full"
                           />
@@ -702,7 +766,9 @@ const BrowseProfiles = () => {
                               <h3 className="text-xl font-semibold text-gray-800 hover:text-primary transition-colors">
                                 <Link to="#">{fullName}</Link>
                               </h3>
-                              <span className="text-gray-600">{user.Designation}</span>
+                              <span className="text-gray-600">
+                                {user.Designation}
+                              </span>
                             </div>
                             <Button
                               variant="outlined"

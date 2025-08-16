@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import { IoLogOutOutline } from "react-icons/io5";
+import { PiSignOut } from "react-icons/pi";
 import { BiLockAlt } from "react-icons/bi";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth } from "../firebaseConfig/firebase";
@@ -211,7 +211,7 @@ const Header = ({ isHomePage = false }) => {
                   className="bg-primary hover:bg-primary-hover text-white font-medium py-2 px-6 rounded text-sm transition-all duration-300 ease-in-out shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 >
                   Sign Out
-                  <IoLogOutOutline size={18} />
+                  <PiSignOut size={18} />
                 </button>
               </>
             )}

@@ -1,5 +1,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 // Home Page Imports
 import Hero from "./Home/Hero";
@@ -92,4 +93,4 @@ export { AdminHeader, AdminLogin, AdminNav, TableRow, TableRowUser, StatsCard, S
 
 export { TermsInfoContainer, SectionHeader, InfoContainer };
 
-export { SocialShare, FilterModal, Pagination };
+export { SocialShare, FilterModal, Pagination, ScrollToTopButton };

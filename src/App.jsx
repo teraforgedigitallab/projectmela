@@ -1,9 +1,23 @@
-import { Routes, Route, Outlet } from 'react-router-dom'
+import { Routes, Route, Outlet } from "react-router-dom";
 
-import { Header, Footer } from './components'
-import { Home, Contact, About, Profile, Projects, BrowseProfiles, ProjectDetail, AddJob, Admin, Terms, PrivacyPolicy, Signin, NotFound } from './pages'
-import { ForgotPassword } from './components'
-import { ToastContainer } from 'react-toastify'
+import { Header, Footer, ScrollToTopButton } from "./components";
+import {
+  Home,
+  Contact,
+  About,
+  Profile,
+  Projects,
+  BrowseProfiles,
+  ProjectDetail,
+  AddJob,
+  Admin,
+  Terms,
+  PrivacyPolicy,
+  Signin,
+  NotFound,
+} from "./pages";
+import { ForgotPassword } from "./components";
+import { ToastContainer } from "react-toastify";
 
 const Layout = () => {
   return (
@@ -14,9 +28,10 @@ const Layout = () => {
         <Outlet />
       </main>
       <Footer />
+      <ScrollToTopButton />
     </>
-  )
-}
+  );
+};
 
 const App = () => {
   return (
@@ -26,7 +41,7 @@ const App = () => {
         <Route path="contact" element={<Contact />} />
         <Route path="about" element={<About />} />
         <Route path="profile/*" element={<Profile />} />
-        <Route path='projects' element={<Projects />} />
+        <Route path="projects" element={<Projects />} />
         <Route path="browse-profiles" element={<BrowseProfiles />} />
         <Route path="project-detail/:id" element={<ProjectDetail />} />
         <Route path="post-project" element={<AddJob />} />
@@ -38,7 +53,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
-  )
-}
+  );
+};
 
-export default App
+export default App;
